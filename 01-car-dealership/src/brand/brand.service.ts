@@ -7,26 +7,7 @@ import { UUID } from 'crypto';
 
 @Injectable()
 export class BrandService {
-  private brands: Brand[] = [
-    {
-      id: uuidv4(),
-      name: 'Honda',
-      createAt: new Date(),
-      updateAt: new Date(),
-    },
-    {
-      id: uuidv4(),
-      name: 'Toyota',
-      createAt: new Date(),
-      updateAt: new Date(),
-    },
-    {
-      id: uuidv4(),
-      name: 'Citroen',
-      createAt: new Date(),
-      updateAt: new Date(),
-    },
-  ];
+  private brands: Brand[] = [];
 
   create(createBrandDto: CreateBrandDto) {
     const brand: Brand = {
@@ -67,5 +48,9 @@ export class BrandService {
     this.brands = this.brands.filter((brand) => brand.id !== id);
 
     return this.brands;
+  }
+
+  fillBrandsWithSeedData(brands: Brand[]) {
+    this.brands = brands;
   }
 }
