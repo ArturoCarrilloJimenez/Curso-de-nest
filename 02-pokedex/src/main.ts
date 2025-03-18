@@ -11,6 +11,9 @@ async function bootstrap() {
     new ValidationPipe({
       whitelist: true,
       forbidNonWhitelisted: true, // Retorna un error si manda mas propiedades que los que necesita
+      transformOptions: {
+        enableImplicitConversion: true,
+      },
     }),
   );
 
