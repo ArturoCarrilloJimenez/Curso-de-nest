@@ -45,6 +45,12 @@ export class Product {
   @Column('text')
   gender: string;
 
+  @Column('text', {
+    array: true,
+    default: [],
+  })
+  tags: string[];
+
   @BeforeInsert() // Método para realizar acciones después de la inserción
   checkSlugInsert() {
     if (!this.slug) {
