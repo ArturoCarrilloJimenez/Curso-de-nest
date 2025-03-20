@@ -1,8 +1,11 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
+
 import { ProductsModule } from './products/products.module';
+
 import { Product } from './products/entities/product.entity';
+import { ProductImage } from './products/entities/product.image.entity';
 
 @Module({
   imports: [
@@ -18,7 +21,8 @@ import { Product } from './products/entities/product.entity';
       ssl: {
         rejectUnauthorized: false, // Clever Cloud suele requerir SSL
       },
-      entities: [Product],
+      // Exporto con una expresión los entities para ahorrarme el tiempo de configurar uno a uno a mano
+      entities: [__dirname + '/**/entities/*.entity{.ts,.js}'],
       synchronize: true,
     }),
 
