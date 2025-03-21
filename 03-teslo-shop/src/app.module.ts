@@ -6,6 +6,7 @@ import { ProductsModule } from './products/products.module';
 
 import { Product } from './products/entities/product.entity';
 import { ProductImage } from './products/entities/product.image.entity';
+import { SeedModule } from './seed/seed.module';
 
 @Module({
   imports: [
@@ -27,6 +28,8 @@ import { ProductImage } from './products/entities/product.image.entity';
     }),
 
     ProductsModule,
+
+    SeedModule,
   ],
   controllers: [],
   providers: [],
