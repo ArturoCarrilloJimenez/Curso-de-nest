@@ -53,7 +53,10 @@ export class Product {
   })
   tags: string[];
 
-  @OneToMany(() => ProductImage, (images) => images.product, { cascade: true })
+  @OneToMany(() => ProductImage, (images) => images.product, {
+    cascade: true,
+    eager: true,
+  })
   images: ProductImage[];
 
   @BeforeInsert() // Método para realizar acciones después de la inserción
