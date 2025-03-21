@@ -44,6 +44,14 @@ $ npm run start:dev
 $ npm run start:prod
 ```
 
+## Ejecutar SEED
+
+Para poder probar de forma correcta la api, ejecuta el SEED que cargara datos de prueba a la base de datos
+
+```
+http://localhost:3000/api/v1/seed
+```
+
 ## Run tests
 
 ```bash
