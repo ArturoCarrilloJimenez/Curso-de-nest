@@ -4,8 +4,6 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 
 import { ProductsModule } from './products/products.module';
 
-import { Product } from './products/entities/product.entity';
-import { ProductImage } from './products/entities/product.image.entity';
 import { SeedModule } from './seed/seed.module';
 import { FilesModule } from './files/files.module';
 
@@ -16,7 +14,7 @@ import { FilesModule } from './files/files.module';
     TypeOrmModule.forRoot({
       type: 'postgres',
       host: process.env.HOST,
-      port: 5432,
+      port: parseInt(process.env.DB_PORT ?? '5432'),
       username: process.env.DB_USERNAME,
       password: process.env.DB_PASSWORD,
       database: process.env.DATABASE,

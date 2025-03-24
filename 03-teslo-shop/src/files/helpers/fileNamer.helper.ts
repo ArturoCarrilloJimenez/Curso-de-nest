@@ -5,8 +5,6 @@ export const fileNamer = (
   file: Express.Multer.File,
   cb: Function,
 ) => {
-  console.log(file);
-
   if (!file) return cb(new Error('File is empty'), false);
 
   const fileExtension = file.mimetype.split('/')[1];

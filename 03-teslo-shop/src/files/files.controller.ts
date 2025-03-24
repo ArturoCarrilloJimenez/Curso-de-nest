@@ -4,6 +4,7 @@ import {
   Get,
   Param,
   Post,
+  Res,
   UploadedFile,
   UseInterceptors,
 } from '@nestjs/common';
@@ -14,17 +15,24 @@ import { diskStorage } from 'multer';
 import { fileNamer } from './helpers/fileNamer.helper';
 import { DirNameFile } from './interfaces/fileType.interface';
 import { DirNameFilePipe } from './pipes/dir-name-file/dir-name-file.pipe';
+import { Response } from 'express';
+import { ConfigService } from '@nestjs/config';
 
 @Controller('files')
 export class FilesController {
-  constructor(private readonly filesService: FilesService) {}
+  constructor(
+    private readonly filesService: FilesService,
+    private readonly configService: ConfigService,
+  ) {}
 
   @Get(':type/:fileName')
   findProductImage(
+    @Res() res: Response,
     @Param('type', DirNameFilePipe) type: DirNameFile,
     @Param('fileName') fileName: string,
   ) {
-    return this.filesService.getStaticFile(type, fileName);
+    const path = this.filesService.getStaticFile(type, fileName);
+    res.sendFile(path);
   }
 
   @Post('product')
@@ -44,7 +52,7 @@ export class FilesController {
     if (!file) throw new BadRequestException('file is missing');
 
     return {
-      secureUrl: `http://localhost:3000/api/v1/files/product/${file.filename}`,
+      secureUrl: `${this.configService.get('HOST_API')}files/product/${file.filename}`,
     };
   }
 }
